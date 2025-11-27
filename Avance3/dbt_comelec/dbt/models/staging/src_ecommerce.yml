@@ -1,0 +1,10 @@
+sources:
+  - name: ecommerce
+    schema: staging
+    tables:
+      - name: usuarios
+      - name: productos
+      - name: categorias
+      - name: ventas
+      - name: metodos_pago
+      - name: direcciones_envio

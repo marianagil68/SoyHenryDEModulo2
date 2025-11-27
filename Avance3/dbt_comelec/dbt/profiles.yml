@@ -1,0 +1,12 @@
+comelec_profile:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: comelec         
+      user: postgres        
+      password: mariana1    
+      port: 5432            
+      dbname: ecommerce     
+      schema: mart       
+      threads: 4

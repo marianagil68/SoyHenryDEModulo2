@@ -1,0 +1,19 @@
+name: 'comelec_dbt'
+version: '1.0.0'
+config-version: 2
+
+profile: 'comelec_profile'   # lo usamos en profiles.yml
+
+model-paths: ["models"]
+
+models:
+  dbt_comelec:
+    staging:
+      +schema: staging      # datos crudos / limpios
+      +materialized: view
+    intermediate:
+      +schema: production   # capa intermedia de negocio
+      +materialized: view
+    marts:
+      +schema: mart         # DW final
+      +materialized: table

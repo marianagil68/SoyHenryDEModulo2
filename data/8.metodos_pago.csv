@@ -1,0 +1,8 @@
+Nombre,Descripcion
+Tarjeta de crédito Visa,Pago con tarjeta de crédito Visa emitida por cualquier banco.
+Tarjeta de crédito Mastercard,Pago con tarjeta de crédito Mastercard emitida por cualquier banco.
+Tarjeta de crédito American Express,Pago con tarjeta de crédito American Express.
+Tarjeta de débito,Pago con tarjeta de débito asociada a cuenta bancaria.
+Transferencia bancaria,Transferencia desde cuenta bancaria del cliente.
+Billetera virtual Mercado Pago,Pago procesado a través de Mercado Pago.
+Efectivo,Pago en efectivo contra entrega o en punto de pago habilitado.

@@ -1,0 +1,46 @@
+models:
+  - name: DimUsuario
+    columns:
+      - name: UsuarioSK
+        tests:
+          - unique
+          - not_null
+
+  - name: DimProducto
+    columns:
+      - name: ProductoSK
+        tests:
+          - unique
+          - not_null
+
+  - name: HechoVentas
+    columns:
+      - name: UsuarioSK
+        tests:
+          - relationships:
+              to: ref('DimUsuario')
+              field: UsuarioSK
+
+      - name: ProductoSK
+        tests:
+          - relationships:
+              to: ref('DimProducto')
+              field: ProductoSK
+
+      - name: DireccionSK
+        tests:
+          - relationships:
+              to: ref('DimDireccionEnvio')
+              field: DireccionSK
+
+      - name: MetodoPagoID
+        tests:
+          - relationships:
+              to: ref('DimMetodoPago')
+              field: MetodoPagoID
+
+      - name: FechaPK
+        tests:
+          - relationships:
+              to: ref('DimTiempo')
+              field: FechaPK

@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    container_name: comelec_dbt
+    volumes:
+      - ./dbt:/usr/app
+    environment:
+      DBT_PROFILES_DIR: /usr/app
+    working_dir: /usr/app
+    stdin_open: true
+    tty: true
+    command: ["tail", "-f", "/dev/null"]
+    ports:
+      - "8080:8080"  # para dbt docs serve si lo usás
+    networks:
+      - comelec-net
+
+networks:
+  comelec-net:
+    external: true
