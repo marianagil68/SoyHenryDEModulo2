@@ -34,6 +34,15 @@ inner join production.categorias c ON c.id = p.categoria_id
 group by c.nombre
 order by productos_vendidos desc
 
+-- 4. Día de la semana con más ventas
+SELECT
+    TO_CHAR(o.fecha_orden, 'Day') AS dia_de_la_semana,
+    COUNT(*) AS ventas
+FROM production.ordenes o
+GROUP BY dia_de_la_semana
+ORDER BY ventas DESC
+LIMIT 1;
+
 -- 5. Cuántas órdenes se generan cada mes y cuál es su variación
 WITH resumen AS (
     SELECT
@@ -56,6 +65,36 @@ SELECT
 FROM resumen;
 
 -- PAGOS Y TRANSACCIONES
+
+-- 1. Cantidad de órdenes por mes
+SELECT EXTRACT(YEAR FROM fecha_orden)::int as anio,
+EXTRACT(MONTH FROM fecha_orden)::int as mes,
+COUNT(*) as cantidad_ventas
+FROM production.ordenes
+GROUP BY anio, mes
+ORDER BY anio, mes
+
+-- 2. Métodos de pago más utilizados
+select m.nombre as metodo_de_pago, count(*) as cantidad
+from production.ordenes_metodos_pago o
+inner join production.metodos_pago m ON m.id = o.metodo_pago_id
+group by metodo_de_pago
+order by cantidad desc
+
+--3. Monto promedio por método de pago
+select m.nombre as metodo_de_pago, avg(o.monto_pagado) as promedio
+from production.ordenes_metodos_pago o
+inner join production.metodos_pago m ON m.id = o.metodo_pago_id
+group by metodo_de_pago
+order by metodo_de_pago
+
+-- 4. Órdenes pagadas con múltiples métodos
+select o.orden_id orden, count(*) as cantidad
+from production.ordenes_metodos_pago o
+inner join production.metodos_pago m ON m.id = o.metodo_pago_id
+group by orden
+having count(*) > 1
+order by orden desc
 
 -- 5. monto total recaudado por mes
 SELECT
